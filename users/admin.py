@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import ModUsers, BanedUsers
 
-# Register your models here.
+
+admin.site.register(ModUsers)
+admin.site.register(BanedUsers)
