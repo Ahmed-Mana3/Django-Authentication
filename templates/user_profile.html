@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<section class=" gradient-custom-2">
+  <div class="container py-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col col-lg-9 col-xl-8">
+        <div class="card">
+          <div class="rounded-top text-white d-flex flex-row bg-secondary" style="text-align: center; display: flex; justify-content: center; align-items: center;">
+            <div class="ms-4 mt-5 d-flex flex-column" >
+            </div>
+            <div class="m-3" style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+              <h5>@{{user.username}}</h5>
+              {% if is_owner %}
+                <a class="btn btn-outline-warning" href="{% url 'logout' %}">logout</a>
+              {% endif %}
+            </div>
+          </div>
+          
+            <div class="mb-2 text-body">
+              <p class="lead fw-normal mb-0" style="text-align: center; margin-top: 15px;">Recent posts</p>
+            </div>
+            <div >
+            <div class="m-3">
+{% for post in posts %}
+  <div class="card mb-3">
+  <div class="card-header d-flex justify-content-between">
+    <p>@{{post.username}}</p>
+    <p class="text-danger">{{post.created_at|date:"d M h:i a"}}</p>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{post.title}}</h5>
+    <p class="card-text">{{post.content}}</p>
+
+    {% if is_mod == True %}
+        {% if post.username.id in banned_users %}
+          <a href="{% url 'unban_user' pk=post.pk %}" class="btn btn-secondary">Banned</a>
+        {% else %}
+        <a href="{% url 'ban_user' pk=post.pk %}" class="btn btn-warning">Ban</a>
+        {% endif %}
+        <a href="{% url 'delete_post' pk=post.pk %}" class="btn btn-danger">Delete</a>
+    {% elif post.username == request.user %}
+        <a href="{% url 'delete_post' pk=post.pk %}" class="btn btn-danger">Delete</a>
+    {% endif %}
+              
+  </div>
+</div>
+{% endfor %}
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}
