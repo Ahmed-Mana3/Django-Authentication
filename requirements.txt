@@ -4,4 +4,3 @@ Django==5.2.6
 django-jazzmin==3.0.1
 packaging==25.0
 pillow==11.3.0
-xraydb==4.5.8
