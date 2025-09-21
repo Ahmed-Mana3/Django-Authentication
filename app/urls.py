@@ -8,4 +8,6 @@ urlpatterns = [
     path('post/<int:pk>/delete', views.delete_post, name='delete_post'),
     path('user/<int:pk>/ban', views.ban_user, name='ban_user'),
     path('user/<int:pk>/unban', views.unban_user, name='unban_user'),
+    path('user/<int:pk>/profile', views.user_profile_by_post, name='user_profile_post'),
+    path('user/<str:username>/profile', views.user_profile, name='user_profile'),
 ]
